@@ -16,8 +16,9 @@ Running a 8-Channel Relay Module you are able to control:
 * LHCP
 ## Two relays left for additional control, i.e a 2x2 Antenna Switch (will add that later to the code) 
 
-# Installation
-
-ToDo
+# Installation (ToDO)
+* modify StandardFirmata on Arduino IDE
+* install flask and pyFirmata
+* wiring / schematic
 
 73 Oliver DL6KBG
