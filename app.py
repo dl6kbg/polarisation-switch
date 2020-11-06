@@ -28,7 +28,6 @@ void setup()
 
 This prevents switching relays on while booting.
 
-
 '''
 
 import pyfirmata
