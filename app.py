@@ -5,23 +5,51 @@ Polarisation Switching Flask application
 Developed by Peter Goodhall 2M0SQL
 Complete project details: https://github.com/magicbug/polarisation-switch
 
+adapted for Arduino running Standard-Firmata by Oliver Goldenstein DL6KBG
+
+November 2020
+
+!!!important note for Firmata
+
+before uploading StandardFirmata to the Arduino add the following at void setup()
+
+----<snip>----
+void setup()
+{
+  digitalWrite(2,HIGH);
+  digitalWrite(3,HIGH);
+  digitalWrite(4,HIGH);
+  digitalWrite(5,HIGH);
+  digitalWrite(6,HIGH);
+  digitalWrite(7,HIGH);
+  digitalWrite(8,HIGH);
+  digitalWrite(9,HIGH);
+----<snip>----
+
+This prevents switching relays on while booting.
+
+
 '''
 
-import RPi.GPIO as GPIO
+import pyfirmata
 from flask import Flask, render_template, request
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
 
-GPIO.setmode(GPIO.BCM)
+# Initiate communication with Arduino
+board = pyfirmata.Arduino('/dev/pol_switch')   # /dev/ttyUSB0
+print("Polarisation Switch connected ...")
 
 # Create a dictionary called pins to store the pin number, name, and pin state:
 pins = {
-   4 : {'name' : 'GPIO 4', 'state' : GPIO.LOW},
-   22 : {'name' : 'GPIO 22', 'state' : GPIO.LOW},
-   6 : {'name' : 'GPIO 4', 'state' : GPIO.LOW},
-   26 : {'name' : 'GPIO 22', 'state' : GPIO.LOW},
+   2 : {'name' : 'D2', 'state' : 1},
+   3 : {'name' : 'D3', 'state' : 1},
+   4 : {'name' : 'D4', 'state' : 1},
+   5 : {'name' : 'D5', 'state' : 1},
+   6 : {'name' : 'D6', 'state' : 1},
+   7 : {'name' : 'D7', 'state' : 1},
    }
 
 vartwo = ''
@@ -29,16 +57,15 @@ message = ''
 
 # Set each pin as an output and make it low:
 for pin in pins:
-   GPIO.setup(pin, GPIO.OUT)
-   GPIO.output(pin, GPIO.LOW)
+   board.digital[pin].write(1)
 
 @app.route("/")
 def main():
-   global vartwo 
+   global vartwo
    global message
    # For each pin, read the pin state and store it in the pins dictionary:
    for pin in pins:
-      pins[pin]['state'] = GPIO.input(pin)
+      pins[pin]['state'] = board.digital[pin].read()
    # Put the pin dictionary into the template data dictionary:
    templateData = {
       'pins' : pins
@@ -48,38 +75,34 @@ def main():
 
 @app.route("/phase/2m/<changephase>")
 def changephase(changephase):
-   global vartwo 
+   global vartwo
    global message
 
    deviceName = changephase
 
    if changephase== "rhcp":
-      # Set the pin high:
-      GPIO.output(4, GPIO.HIGH)
-      GPIO.output(22, GPIO.HIGH)
-      # Save the status message to be passed into the template:
+      board.digital[2].write(0)
+      board.digital[4].write(0)
       message = "rhcp"
 
    if changephase == "lhcp":
-      # Set the pin high:
-      GPIO.output(4, GPIO.HIGH)
-      GPIO.output(22, GPIO.LOW)
-      # Save the status message to be passed into the template:
+      board.digital[2].write(0)
+      board.digital[4].write(1)
       message = "lhcp"
 
    if changephase == "v":
-      GPIO.output(4, GPIO.LOW)
-      GPIO.output(22, GPIO.LOW)
+      board.digital[2].write(1)
+      board.digital[3].write(0)
       message = "v"
 
    if changephase == "h":
-      GPIO.output(4, GPIO.LOW)
-      GPIO.output(22, GPIO.HIGH)
+      board.digital[2].write(1)
+      board.digital[3].write(1)
       message = "h"
 
    # For each pin, read the pin state and store it in the pins dictionary:
    for pin in pins:
-      pins[pin]['state'] = GPIO.input(pin)
+      pins[pin]['state'] = board.digital[pin].read()
 
    # Along with the pin dictionary, put the message into the template data dictionary:
    templateData = {
@@ -87,43 +110,38 @@ def changephase(changephase):
       'message' : message,
       'vartwo': vartwo
    }
-
    return render_template('main.html', **templateData)
 
 @app.route("/70cm/<phase>")
 def phase(phase):
-   global vartwo 
+   global vartwo
    global message
 
    deviceName = phase
 
    if phase== "rhcp":
-      # Set the pin high:
-      GPIO.output(6, GPIO.HIGH)
-      GPIO.output(26, GPIO.HIGH)
-      # Save the status message to be passed into the template:
+      board.digital[5].write(0)
+      board.digital[7].write(0)
       vartwo = "rhcp"
 
    if phase == "lhcp":
-      # Set the pin high:
-      GPIO.output(6, GPIO.HIGH)
-      GPIO.output(26, GPIO.LOW)
-      # Save the status message to be passed into the template:
+      board.digital[5].write(0)
+      board.digital[7].write(1)
       vartwo = "lhcp"
 
    if phase == "v":
-      GPIO.output(6, GPIO.LOW)
-      GPIO.output(26, GPIO.LOW)
+      board.digital[5].write(1)
+      board.digital[6].write(0)
       vartwo = "v"
 
    if phase == "h":
-      GPIO.output(6, GPIO.LOW)
-      GPIO.output(26, GPIO.HIGH)
+      board.digital[5].write(1)
+      board.digital[7].write(1)
       vartwo = "h"
 
    # For each pin, read the pin state and store it in the pins dictionary:
    for pin in pins:
-      pins[pin]['state'] = GPIO.input(pin)
+      pins[pin]['state'] = board.digital[pin].read()
 
    # Along with the pin dictionary, put the message into the template data dictionary:
    templateData = {
@@ -146,16 +164,16 @@ def action(changePin, action):
    # If the action part of the URL is "on," execute the code indented below:
    if action == "on":
       # Set the pin high:
-      GPIO.output(changePin, GPIO.HIGH)
+      board.digital[changePin].write(0) 
       # Save the status message to be passed into the template:
       message = "Turned " + deviceName + " on."
    if action == "off":
-      GPIO.output(changePin, GPIO.LOW)
+      board.digital[changePin].write(1)
       message = "Turned " + deviceName + " off."
 
    # For each pin, read the pin state and store it in the pins dictionary:
    for pin in pins:
-      pins[pin]['state'] = GPIO.input(pin)
+      pins[pin]['state'] = board.digital[pin].read()
 
    # Along with the pin dictionary, put the message into the template data dictionary:
    templateData = {
@@ -166,6 +184,7 @@ def action(changePin, action):
 
 @app.route("/api/status")
 def api():
+
  return "Running"
 
 if __name__ == "__main__":
