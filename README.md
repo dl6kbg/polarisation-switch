@@ -12,6 +12,6 @@ Running a 8-Channel Relay Module you'll have:
 * Vertical
 * RHCP
 * LHCP
-## Additional relays for an Antenna 2 by 2 switch (maybe added later to the code) 
+## The two left relays maybe used for an Antenna 2 by 2 switch (will add that later to the code) 
 
 73 Oliver DL6KBG
