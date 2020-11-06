@@ -5,13 +5,13 @@ Forked from Peter (2M0SQL) - https://github.com/magicbug/polarisation-switch
 This code runs on my Raspberry Pi hosting a ser2net server for my Spid RAS Rotator and Cloudlog (https://github.com/magicbug/Cloudlog).
 It should also run connecting the Arduino to a Linux, Mac or Windows PC with a Python enviroment (Not tested yet). It is just comfortable for my situation.
 
-Running a 8-Channel Relay Module you'll have:
+Running a 8-Channel Relay Module you are able to control:
 
-## Polarisation Options for a VHF and UHF X-Quad
+## Polarisation for two Wimo X-Quads (VHF and UHF)
 * Horizontal 
 * Vertical
 * RHCP
 * LHCP
-## The two left relays maybe used for an Antenna 2 by 2 switch (will add that later to the code) 
+## Two relays left for additional control, i.e a 2x2 Antenna Switch (will add that later to the code) 
 
 73 Oliver DL6KBG
