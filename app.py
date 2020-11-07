@@ -80,21 +80,25 @@ def changephase(changephase):
    deviceName = changephase
 
    if changephase== "rhcp":
+      board.digital[3].write(1) # turn unused relay off to save power
       board.digital[2].write(0)
       board.digital[4].write(0)
       message = "rhcp"
 
    if changephase == "lhcp":
+      board.digital[3].write(1) # turn unused relay off to save power
       board.digital[2].write(0)
       board.digital[4].write(1)
       message = "lhcp"
 
    if changephase == "v":
+      board.digital[4].write(1) # turn unused relay off to save power
       board.digital[2].write(1)
       board.digital[3].write(0)
       message = "v"
 
    if changephase == "h":
+      board.digital[4].write(1) # turn unused relay off to save power
       board.digital[2].write(1)
       board.digital[3].write(1)
       message = "h"
@@ -119,23 +123,27 @@ def phase(phase):
    deviceName = phase
 
    if phase== "rhcp":
+      board.digital[6].write(1) # turn unused relay off to save power
       board.digital[5].write(0)
       board.digital[7].write(0)
       vartwo = "rhcp"
 
    if phase == "lhcp":
+      board.digital[6].write(1) # turn unused relay off to save power
       board.digital[5].write(0)
       board.digital[7].write(1)
       vartwo = "lhcp"
 
    if phase == "v":
+      board.digital[7].write(1) # turn unused relay off to save power
       board.digital[5].write(1)
       board.digital[6].write(0)
       vartwo = "v"
 
    if phase == "h":
+      board.digital[7].write(1) # turn unused relay off to save power
       board.digital[5].write(1)
-      board.digital[7].write(1)
+      board.digital[6].write(1)
       vartwo = "h"
 
    # For each pin, read the pin state and store it in the pins dictionary:
