@@ -63,7 +63,7 @@ add
 SUBSYSTEMS=="usb",KERNEL=="ttyUSB*",ATTRS{idVendor}=="1a86",ATTRS{idProduct}=="7523",SYMLINK+="pol_switch",GROUP="dialout",MODE="0666"
 ```
 
-Check, if your board as a different Vendor and Product ID. 
+Check, if your board has a different Vendor and Product ID. 
 The switch is then available at:
 
 ```
