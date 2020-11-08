@@ -20,7 +20,8 @@ Running a 8-Channel Relay Module you are able to control:
 
 * Two relays left for additional control, i.e a 2x2 Antenna Switch (will add that later to the code). 
 
-# Installation (ToDO)
+# Installation and usage
+
 * modify StandardFirmata on Arduino IDE
 
 On Arduino IDE go to Examples - Firmata and choose StandardFirmata.
