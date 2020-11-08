@@ -50,4 +50,18 @@ pip install pyfirmata
 
 * wiring / schematic
 
+* Usage
+
+```
+python -O app.py
+```
+
+Your application should then be available at:
+```
+http://yourip:5000
+```
+
+![alt text](https://user-images.githubusercontent.com/34808184/98482214-2f123980-2200-11eb-9690-1057b1e2b93e.png)
+
+
 73 Oliver DL6KBG
