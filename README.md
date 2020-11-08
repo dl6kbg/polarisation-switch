@@ -50,7 +50,31 @@ pip install Flask
 pip install pyfirmata
 ```
 
+* Add udev rule for the Arduino
+
+```
+nano /etc/udev/rules.d/70-polarisation-switch.rules
+```
+
+add
+
+```
+#Arduino Uno - Polarisation Switch
+SUBSYSTEMS=="usb",KERNEL=="ttyUSB*",ATTRS{idVendor}=="1a86",ATTRS{idProduct}=="7523",SYMLINK+="pol_switch",GROUP="dialout",MODE="0666"
+```
+
+Check, if your board as a different Vendor and Product ID. 
+The switch is then available at:
+
+```
+/dev/pol_switch
+```
+
+which is the recognized by this code. See app.py for further details.
+
 * wiring / schematic
+  
+  In progress.
 
 * Usage
 
