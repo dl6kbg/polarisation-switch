@@ -17,7 +17,8 @@ Running a 8-Channel Relay Module you are able to control:
 * Vertical
 * RHCP
 * LHCP
-## Two relays left for additional control, i.e a 2x2 Antenna Switch (will add that later to the code) 
+
+* Two relays left for additional control, i.e a 2x2 Antenna Switch (will add that later to the code). 
 
 # Installation (ToDO)
 * modify StandardFirmata on Arduino IDE
