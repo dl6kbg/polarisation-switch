@@ -12,7 +12,7 @@ The Arduino has to run a modifed StandardFirmata. This code uses pyFirmata to co
 
 Running a 8-Channel Relay Module you are able to control:
 
-## Polarisation for two Wimo X-Quads (VHF and UHF)
+# Polarisation for two Wimo X-Quads (VHF and UHF)
 * Horizontal 
 * Vertical
 * RHCP
