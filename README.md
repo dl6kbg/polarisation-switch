@@ -1,3 +1,5 @@
+!![alt text](https://user-images.githubusercontent.com/34808184/98468683-e34d9900-21db-11eb-9373-c8a89108a057.jpghttps://user-images.githubusercontent.com/34808184/98468683-e34d9900-21db-11eb-9373-c8a89108a057.jpghttps://user-images.githubusercontent.com/34808184/98468683-e34d9900-21db-11eb-9373-c8a89108a057.jpghttps://user-images.githubusercontent.com/34808184/98468683-e34d9900-21db-11eb-9373-c8a89108a057.jpg)
+
 # Polarisation Switch Control System
 Control polarisation for Wimo X-Quads using an Arduino Uno and a 8-Channel Relay Module. 
 Forked from Peter (2M0SQL) - https://github.com/magicbug/polarisation-switch
