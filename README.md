@@ -18,7 +18,33 @@ Running a 8-Channel Relay Module you are able to control:
 
 # Installation (ToDO)
 * modify StandardFirmata on Arduino IDE
+
+On Arduino IDE go to Examples - Firmata and choose StandardFirmata.
+
+Before uploading StandardFirmata to the Arduino add the following at void setup()
+
+```
+void setup()
+{
+  digitalWrite(2,HIGH);
+  digitalWrite(3,HIGH);
+  digitalWrite(4,HIGH);
+  digitalWrite(5,HIGH);
+  digitalWrite(6,HIGH);
+  digitalWrite(7,HIGH);
+  digitalWrite(8,HIGH);
+  digitalWrite(9,HIGH);
+```
+
+This prevents switching relays on while booting.
+
 * install flask and pyFirmata
+
+```
+pip install Flask
+pip install pyfirmata
+```
+
 * wiring / schematic
 
 73 Oliver DL6KBG
